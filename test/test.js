@@ -1,7 +1,7 @@
 const path = require('path');
 const test = require('tape');
 const Knex = require('knex');
-const geojson2pgsql = require('../src/geojson2pgsql.js');
+const geojson2postgis = require('../src/geojson2postgis.js');
 
 const db = Knex({
   debug: false,
@@ -32,10 +32,10 @@ const geojson = {
   ]
 };
 
-test('geojson2pgsql', (t) => {
+test('geojson2postgis', (t) => {
   t.plan(2);
 
-  geojson2pgsql(db, 'test', geojson).then(function (result) {
+  geojson2postgis(db, 'test', geojson).then(function (result) {
     t.ok(result);
 
     db('test').select(

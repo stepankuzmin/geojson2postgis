@@ -1,4 +1,4 @@
-function geojson2pgsql(db, tableName, geojson) {
+function geojson2postgis(db, tableName, geojson) {
   const features = geojson.features.map(function getRow(feature) {
     return {
       geom: db.raw(`st_setsrid(st_geomfromgeojson('${JSON.stringify(feature.geometry)}'), 4326)`),
@@ -14,4 +14,4 @@ function geojson2pgsql(db, tableName, geojson) {
   });
 }
 
-module.exports = geojson2pgsql;
+module.exports = geojson2postgis;

@@ -5,7 +5,7 @@ const path = require('path');
 const Knex = require('knex');
 const minimist = require('minimist');
 const packagejson = require('./package.json');
-const geojson2pgsql = require('./src/geojson2pgsql.js');
+const geojson2postgis = require('./src/geojson2postgis.js');
 
 const config = minimist(process.argv.slice(2), {
   string: [
@@ -38,7 +38,7 @@ if (config.version) {
 if (config.help) {
   var usage = [
       ''
-    , '  Usage: geojson2pgsql [filename] [options]'
+    , '  Usage: geojson2postgis [filename] [options]'
     , ''
     , '  where [filename] is path to GeoJSON data and [options] is any of:'
     , '    --database - database'
@@ -48,7 +48,7 @@ if (config.help) {
     , '    --password - database user password'
     , '    --version - returns running version then exits'
     , ''
-    , 'geojson2pgsql@' + packagejson.version
+    , 'geojson2postgis@' + packagejson.version
     , 'node@' + process.versions.node
   ].join('\n')
   console.log(usage);
@@ -81,11 +81,11 @@ const db = Knex({
 const tableName = path.parse(fileName).name;
 const geojson = JSON.parse(fs.readFileSync(fileName));
 
-geojson2pgsql(db, tableName, geojson).then(function (result) {
+geojson2postgis(db, tableName, geojson).then(function (result) {
   console.log(`${result.rowCount} rows inserted`);
   return db.destroy();
 }).catch(function(error) {
   console.error('Error:', error)
 });
 
-module.exports = geojson2pgsql;
+module.exports = geojson2postgis;
