@@ -5,6 +5,7 @@ const path = require('path');
 const Knex = require('knex');
 const minimist = require('minimist');
 const packagejson = require('./package.json');
+const geojson2pgsql = require('./src/geojson2pgsql.js');
 
 const config = minimist(process.argv.slice(2), {
   string: [
@@ -61,7 +62,7 @@ if (!fileName) {
   process.exit(-1);
 };
 
-const knex = Knex({
+const db = Knex({
   debug: false,
   client: 'postgresql',
   connection: {
@@ -78,24 +79,13 @@ const knex = Knex({
 });
 
 const tableName = path.parse(fileName).name;
-const data = JSON.parse(fs.readFileSync(fileName));
+const geojson = JSON.parse(fs.readFileSync(fileName));
 
-const features = data.features.map(function getRow(feature) {
-  return {
-    geom: knex.raw(`st_setsrid(st_geomfromgeojson('${JSON.stringify(feature.geometry)}'), 4326)`),
-    properties: feature.properties
-  };
-});
-
-knex.schema.createTableIfNotExists(tableName, function (table) {
-  table.jsonb('properties').defaultTo('{}');
-  table.specificType('geom', 'geometry(GEOMETRY, 4326)').notNullable();
-}).then(function () {
-  console.log(`${tableName} table created`);
-  return knex(tableName).insert(features);
-}).then(function (result) {
+geojson2pgsql(db, tableName, geojson).then(function (result) {
   console.log(`${result.rowCount} rows inserted`);
-  return knex.destroy();
+  return db.destroy();
 }).catch(function(error) {
-  console.error(error)
+  console.error('Error:', error)
 });
+
+module.exports = geojson2pgsql;
