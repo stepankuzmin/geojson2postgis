@@ -1,0 +1,27 @@
+{
+  "name": "geojson2pgsql",
+  "version": "1.0.0",
+  "description": "Insert GeoJSON features into PostGIS database",
+  "main": "index.js",
+  "author": "Stepan Kuzmin <to.stepan.kuzmin@gmail.com> (stepankuzmin.ru)",
+  "license": "MIT",
+  "homepage": "https://github.com/stepankuzmin/geojson2pgsql#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stepankuzmin/geojson2pgsql.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stepankuzmin/geojson2pgsql/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "geojson2pgsql": "./index.js"
+  },
+  "dependencies": {
+    "knex": "0.11.10",
+    "minimist": "1.2.0",
+    "pg": "6.1.0"
+  }
+}
