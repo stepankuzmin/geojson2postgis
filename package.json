@@ -20,11 +20,11 @@
     "geojson2postgis": "./index.js"
   },
   "dependencies": {
-    "knex": "0.11.10",
+    "knex": "0.12.6",
     "minimist": "1.2.0",
-    "pg": "6.1.0"
+    "pg": "6.1.2"
   },
   "devDependencies": {
-    "tape": "4.6.0"
+    "tape": "4.6.3"
   }
 }
