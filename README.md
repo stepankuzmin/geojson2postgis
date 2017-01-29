@@ -1,6 +1,7 @@
 # geojson2postgis
 
 [![Build Status](https://travis-ci.org/stepankuzmin/geojson2postgis.svg?branch=master)](https://travis-ci.org/stepankuzmin/geojson2postgis)
+[![Greenkeeper badge](https://badges.greenkeeper.io/stepankuzmin/geojson2postgis.svg)](https://greenkeeper.io/)
 
 Insert GeoJSON features into PostGIS database
 
