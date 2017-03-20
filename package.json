@@ -22,7 +22,7 @@
   "dependencies": {
     "knex": "0.12.8",
     "minimist": "1.2.0",
-    "pg": "6.1.4"
+    "pg": "6.1.5"
   },
   "devDependencies": {
     "tape": "4.6.3"
