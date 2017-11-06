@@ -20,7 +20,7 @@
     "geojson2postgis": "./index.js"
   },
   "dependencies": {
-    "knex": "0.13.0",
+    "knex": "0.14.0",
     "minimist": "1.2.0",
     "pg": "7.4.0"
   },
