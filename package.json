@@ -25,6 +25,6 @@
     "pg": "7.7.1"
   },
   "devDependencies": {
-    "tape": "4.9.1"
+    "tape": "4.9.2"
   }
 }
